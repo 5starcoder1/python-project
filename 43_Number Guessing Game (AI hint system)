@@ -1,0 +1,45 @@
+import random
+
+print("🎯 Welcome to AI Number Guessing Game")
+print("I will help you guess the number 😉")
+
+# Random number
+number = random.randint(1, 100)
+
+low = 1
+high = 100
+attempts = 0
+
+while True:
+    try:
+        guess = int(input(f"\nGuess a number between {low} and {high}: "))
+        attempts += 1
+
+        if guess < low or guess > high:
+            print("⚠️ Please guess within the range!")
+            continue
+
+        if guess == number:
+            print(f"🎉 Correct! You guessed in {attempts} attempts.")
+            break
+
+        elif guess < number:
+            print("📉 Too low!")
+            low = guess + 1  # AI narrows range
+
+        else:
+            print("📈 Too high!")
+            high = guess - 1  # AI narrows range
+
+        # AI Hint System
+        hint_range = high - low
+
+        if hint_range <= 10:
+            print(f"🤖 AI Hint: You're very close! Try between {low} and {high}")
+        elif hint_range <= 30:
+            print(f"🤖 AI Hint: Narrowing down... Range is {low}-{high}")
+        else:
+            print("🤖 AI Hint: Keep trying, you're far away!")
+
+    except ValueError:
+        print("❌ Enter a valid number!")
